@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Termo</title>
+</head>
+<body class="container">
+<header class="row">
+    <h1 class="text-center my-5 text-white h1titulo">TERMO</h1></header>
+<form id="linha1" class="row justify-content-center">
+    <input class="square-input mx-1 mb-1" id="1" onkeydown="keyPress(this, 1)" onfocus="this.select()" oninput="moveFocus(1,2)" maxlength="1" type="text" autocomplete="off" required/>
+    <input class="square-input mx-1 mb-1" id="2" onkeydown="keyPress(this, 2)" onfocus="this.select()" oninput="moveFocus(2,3)" maxlength="1" type="text" autocomplete="off" required/>
+    <input class="square-input mx-1 mb-1" id="3" onkeydown="keyPress(this, 3)" onfocus="this.select()" oninput="moveFocus(3,4)" maxlength="1" type="text" autocomplete="off" required/>
+    <input class="square-input mx-1 mb-1" id="4" onkeydown="keyPress(this, 4)" onfocus="this.select()" oninput="moveFocus(4,5)" maxlength="1" type="text" autocomplete="off" required/>
+    <input class="square-input mx-1 mb-1" id="5" onkeydown="keyPress(this, 5)" onfocus="this.select()" oninput="moveFocus(5,5)" maxlength="1" type="text" autocomplete="off" required/>
+    <button type="submit" onclick="mudaLinha(1)" hidden></button>
+</form>
+
+<form id="linha2" class="row justify-content-center">
+    <input class="jerfson square-input mx-1 mb-1" id="6" onkeydown="keyPress(this, 6)" onfocus="this.select()" oninput="moveFocus(6,7)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="7" onkeydown="keyPress(this, 7)" onfocus="this.select()" oninput="moveFocus(7,8)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="8" onkeydown="keyPress(this, 8)" onfocus="this.select()" oninput="moveFocus(8,9)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="9" onkeydown="keyPress(this, 9)" onfocus="this.select()" oninput="moveFocus(9,10)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="10" onkeydown="keyPress(this, 10)" onfocus="this.select()" oninput="moveFocus(10,10)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <button type="submit" onclick="mudaLinha(2)" hidden></button>
+</form>
+
+<form id="linha3" class="row justify-content-center">
+    <input class="square-input mx-1 mb-1" id="11" onkeydown="keyPress(this, 11)" onfocus="this.select()" oninput="moveFocus(11,12)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="12" onkeydown="keyPress(this, 12)" onfocus="this.select()" oninput="moveFocus(12,13)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="13" onkeydown="keyPress(this, 13)" onfocus="this.select()" oninput="moveFocus(13,14)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="14" onkeydown="keyPress(this, 14)" onfocus="this.select()" oninput="moveFocus(14,15)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="15" onkeydown="keyPress(this, 15)" onfocus="this.select()" oninput="moveFocus(15,15)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <button type="submit" onclick="mudaLinha(3)" hidden></button>
+</form>
+
+<form id="linha4" class="row justify-content-center">
+    <input class="square-input mx-1 mb-1" id="16" onkeydown="keyPress(this, 16)" onfocus="this.select()" oninput="moveFocus(16,17)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="17" onkeydown="keyPress(this, 17)" onfocus="this.select()" oninput="moveFocus(17,18)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="18" onkeydown="keyPress(this, 18)" onfocus="this.select()" oninput="moveFocus(18,19)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="19" onkeydown="keyPress(this, 19)" onfocus="this.select()" oninput="moveFocus(19,20)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="20" onkeydown="keyPress(this, 20)" onfocus="this.select()" oninput="moveFocus(20,20)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <button type="submit" onclick="mudaLinha(4)" hidden></button>
+</form>
+
+<form id="linha5" class="row justify-content-center">
+    <input class="square-input mx-1 mb-1" id="21" onkeydown="keyPress(this, 21)" onfocus="this.select()" oninput="moveFocus(21,22)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="22" onkeydown="keyPress(this, 22)" onfocus="this.select()" oninput="moveFocus(22,23)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="23" onkeydown="keyPress(this, 23)" onfocus="this.select()" oninput="moveFocus(23,24)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="24" onkeydown="keyPress(this, 24)" onfocus="this.select()" oninput="moveFocus(24,25)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="25" onkeydown="keyPress(this, 25)" onfocus="this.select()" oninput="moveFocus(25,25)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <button type="submit" onclick="mudaLinha(5)" hidden></button>
+</form>
+
+<form id="linha6" class="row justify-content-center">
+    <input class="square-input mx-1 mb-1" id="26" onkeydown="keyPress(this, 26)" onfocus="this.select()" oninput="moveFocus(26,27)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="27" onkeydown="keyPress(this, 27)" onfocus="this.select()" oninput="moveFocus(27,28)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="28" onkeydown="keyPress(this, 28)" onfocus="this.select()" oninput="moveFocus(28,29)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="29" onkeydown="keyPress(this, 29)" onfocus="this.select()" oninput="moveFocus(29,30)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="30" onkeydown="keyPress(this, 30)" onfocus="this.select()" oninput="moveFocus(30,30)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <button type="submit" onclick="mudaLinha(6)" hidden></button>
+</form>
+
+<div class="progress my-5" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0"
+     aria-valuemax="100">
+
+    <div class="progress-bar" style="width: 0%"></div>
+    <div class="modal" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title"></h1></div>
+                <div class="modal-body text-center fs-4">
+                    <p></p></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+        const myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+        var palavra = "";
+        let array = [];
+
+        fetch("palavras_filtradas.txt").then(response => response.text())
+            .then(text => {
+                array = text.split("\n");
+
+                const dataAtual = new Date();
+                const dia = dataAtual.getUTCDate();
+                const mes = dataAtual.getUTCMonth() + 1;
+                const ano = dataAtual.getUTCFullYear();
+
+                //AAA-MM-DD
+                const semente = `${ano}-${mes}-${dia}`
+
+                let hash = 0;
+                for (let i = 0; i < semente.length; i++) {
+                    hash = (hash << 5) - hash + semente.charCodeAt(i);
+                    hash |= 0;
+                }
+                palavra = array[Math.abs(hash) % (19081 + 1)].toUpperCase();
+            });
+
+        function mudaLinha(contador) {
+            var form = document.getElementById("linha" + contador);
+            form.addEventListener("submit", function (event) {
+                event.preventDefault()
+            })
+
+            let conteudoConcatenado = "";
+
+            Array.from(form.elements).forEach(elemento => {
+                conteudoConcatenado += elemento.value.toLocaleLowerCase();
+            });
+
+            conteudoConcatenado = removerAcentos(conteudoConcatenado)
+
+            Array.from(form.elements).forEach(elemento => {
+                elemento.value = removerAcentos(elemento.value);
+            })
+
+            if (conteudoConcatenado.length < 5) {
+                return;
+            }
+
+            var existePalavra = false
+
+            palavraDigitada = "";
+            for (var i = 0; i < array.length; i++) {
+                if (removerAcentos(array[i].toString()) === conteudoConcatenado) {
+                    existePalavra = true;
+                    palavraDigitada = array[i].toString()
+                    Array.from(form.elements).forEach((elemento, index) => {
+                        elemento.value = palavraDigitada[index];
+                    })
+                }
+            }
+
+            if (removerAcentos(palavra.toString()) !== conteudoConcatenado.toUpperCase().toString() && existePalavra) {
+                aproveitamento(contador)
+            }
+
+            if (!existePalavra) {
+                document.getElementsByClassName("modal-title")[0].innerHTML = "<h1>Animal,</h1>"
+                document.getElementsByClassName("modal-body")[0].innerHTML = `<p>Esta palavra não existe!</p>`;
+                myModal.show()
+
+                setTimeout(() => {
+                    myModal.hide()
+                }, 2000)
+                return;
+            }
+
+            let certos = "";
+            let letraContagem = {}; // Para contar as ocorrências de letras na palavra
+            let x = 0;
+
+            // Contando a quantidade de cada letra na palavra
+            palavra.split("").forEach(letter => {
+                letraContagem[letter] = (letraContagem[letter] || 0) + 1;
+            });
+
+            // Primeira loop para marcar as letras certas (verdes)
+            Array.from(form.elements).forEach(elemento => {
+                if (elemento.type === "text") {
+                    const inputValue = removerAcentos(elemento.value.toUpperCase()); // Para letras com acento ficarem verdes caso exista na palavra premiada
+                    if (palavra[x] === inputValue) {
+                        certos += inputValue;
+                        elemento.classList.add("green"); // Marca como verde
+                        letraContagem[inputValue]--; // Diminui a contagem da letra na palavra
+                    }
+                    x++;
+                }
+            });
+
+            x = 0;
+            Array.from(form.elements).forEach(elemento => {
+                if (elemento.type === "text") {
+                    const inputValue = removerAcentos(elemento.value.toUpperCase()); // Para letras com acento ficarem amarelas caso exista na palavra premiada
+                    if (!elemento.classList.contains("green")) {
+                        if (letraContagem[inputValue] > 0) {
+                            if (palavra[x] !== inputValue) {
+                                elemento.classList.add("yellow");
+                                letraContagem[inputValue]--;
+                            }
+                        } else {
+                            elemento.classList.add("red");
+                        }
+                    }
+                    x++;
+                }
+            });
+
+            var acertou = false
+            if (removerAcentos(palavra.toString()) === conteudoConcatenado.toUpperCase().toString()) {
+                acertou = true
+                document.getElementsByClassName("modal-title")[0].innerHTML = "<h1>Você Acertou!</h1>"
+                document.getElementsByClassName("modal-body")[0].innerHTML = `<p>Parabéns!</p>`
+                myModal.show()
+                setTimeout(() => {
+                    myModal.hide()
+                }, 2000)
+            }
+
+            if (!acertou && contador >= 6) {
+                document.getElementsByClassName("modal-title")[0].innerHTML = "<h1>Ops!</h1>"
+                document.getElementsByClassName("modal-body")[0].innerHTML = `<p>Você errou todas as tentativas! A palavra certa é: ${palavra}</p>`;
+                myModal.show()
+
+                setTimeout(() => {
+                    myModal.hide()
+                }, 5000)
+            }
+
+            Array.from(form.elements).forEach(elemento => {
+                elemento.setAttribute("disabled", true);
+            })
+
+            if(acertou) return;
+            contador++;
+            form = document.getElementById("linha" + contador);
+            Array.from(form.elements).forEach(elemento => {
+                elemento.removeAttribute("disabled");
+            })
+            form.elements[0].focus();
+        }
+
+        document.getElementsByTagName("input")[0].focus();
+
+        function moveFocus(correntID, nextID) {
+            const correntInput = document.getElementById(correntID);
+            const nextInput = document.getElementById(nextID);
+
+            if (correntInput && correntInput.value.length >= correntInput.maxLength) {
+                if (nextInput && document.activeElement !== nextInput) {
+                    nextInput.focus();
+                    nextInput.select();
+                }
+            }
+        }
+
+        function removerAcentos(str) {
+            return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+        }
+        function keyPress(elemento, id) {
+            elemento.addEventListener('keydown', ({key}) => {
+                if (key === "Backspace" || key === 'Delete') {
+                    if(elemento.value === ""){
+                            document.getElementById(id-1).focus()
+                    }
+                }
+            })
+        }
+        function aproveitamento(contador){
+            percentual = 100 / 6 * contador
+            document.getElementsByClassName("progress")[0].setAttribute("aria-valuenow", percentual)
+            document.getElementsByClassName("progress-bar")[0].style = `width: ${percentual}%`
+            return percentual
+        }
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+.square-input {
+    text-align: center;
+    font-size: 35px; /* Tamanho da fonte */
+    font-weight: bold;
+    background: rgba(85, 85, 85, 0); /* Cor de fundo dos campos */
+    color: white; /* Cor da fontes dos inputs */
+    border: 5px solid #4c4347; /* Borda leve */
+    border-radius: 10px; /* Borda arredondada */
+    text-transform: uppercase;
+    caret-color: transparent;
+}
+
+/* Quando o dispositivo está em modo retrato (mais comprido) */
+@media (orientation: portrait) {
+    .square-input{
+        width: 7vh;
+        height: 7vh;
+        min-width: 50px; /* Largura mínima */
+        min-height: 50px; /* Altura mínima */
+    }
+}
+
+/* Quando o dispositivo está em modo paisagem (mais largo) */
+@media (orientation: landscape) {
+    .square-input {
+        width: 5vw;
+        height: 5vw;
+        min-width: 70px;
+        min-height: 70px;
+    }
+}
+
+input:focus {
+    background: rgba(136, 136, 136, 0);
+    outline: none;
+    border-bottom: 10px solid #4c4347;
+}
+
+::selection {
+    background: transparent;
+}
+
+:disabled {
+    background-color: rgba(0, 0, 0, 0.15); /* Torna o fundo do campo mais claro */
+    border: 0px solid #4c4347; /* Borda leve */
+}
+
+body {
+    background: #6c5c64;
+    margin: 0;
+}
+
+.green {
+    background-color: #3AA394;
+}
+
+.yellow {
+    background-color: #D3AD69;
+}
+.red {
+    background-color: #ff4747;
+}
+
+.h1titulo {
+    font-weight: bold;
+}
