@@ -66,204 +66,219 @@
 
 <div class="progress my-5" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0"
      aria-valuemax="100">
+    <div class="progress-bar progress-bar-striped" style="width: 0%"></div>
+</div>
 
-    <div class="progress-bar" style="width: 0%"></div>
-    <div class="modal" id="exampleModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h1 class="modal-title"></h1></div>
-                <div class="modal-body text-center fs-4">
-                    <p></p></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                </div>
+<div class="modal" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h1 class="modal-title"></h1></div>
+            <div class="modal-body text-center fs-4">
+                <p></p></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
-    <script src="js/bootstrap.bundle.js"></script>
-    <script>
-        const myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
-        var palavra = "";
-        let array = [];
 
-        fetch("palavras_filtradas.txt").then(response => response.text())
-            .then(text => {
-                array = text.split("\n");
+<script src="js/bootstrap.bundle.js"></script>
+<script>
+    const myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+    var palavra = "";
+    let array = [];
 
-                const dataAtual = new Date();
-                const dia = dataAtual.getUTCDate();
-                const mes = dataAtual.getUTCMonth() + 1;
-                const ano = dataAtual.getUTCFullYear();
+    fetch("palavras_filtradas.txt").then(response => response.text())
+        .then(text => {
+            array = text.split("\n");
 
-                //AAA-MM-DD
-                const semente = `${ano}-${mes}-${dia}`
+            const dataAtual = new Date();
+            const dia = dataAtual.getUTCDate();
+            const mes = dataAtual.getUTCMonth() + 1;
+            const ano = dataAtual.getUTCFullYear();
 
-                let hash = 0;
-                for (let i = 0; i < semente.length; i++) {
-                    hash = (hash << 5) - hash + semente.charCodeAt(i);
-                    hash |= 0;
+            //AAA-MM-DD
+            const semente = `${ano}-${mes}-${dia}`
+
+            let hash = 0;
+            for (let i = 0; i < semente.length; i++) {
+                hash = (hash << 5) - hash + semente.charCodeAt(i);
+                hash |= 0;
+            }
+            palavra = array[Math.abs(hash) % (19081 + 1)].toUpperCase();
+        });
+
+    function mudaLinha(contador) {
+        var form = document.getElementById("linha" + contador);
+        form.addEventListener("submit", function (event) {
+            event.preventDefault()
+        })
+
+        let conteudoConcatenado = "";
+
+        Array.from(form.elements).forEach(elemento => {
+            conteudoConcatenado += elemento.value.toLocaleLowerCase();
+        });
+
+        conteudoConcatenado = removerAcentos(conteudoConcatenado)
+
+        Array.from(form.elements).forEach(elemento => {
+            elemento.value = removerAcentos(elemento.value);
+        })
+
+        if (conteudoConcatenado.length < 5) {
+            return;
+        }
+
+        var existePalavra = false
+
+        palavraDigitada = "";
+        for (var i = 0; i < array.length; i++) {
+            if (removerAcentos(array[i].toString()) === conteudoConcatenado) {
+                existePalavra = true;
+                palavraDigitada = array[i].toString()
+                Array.from(form.elements).forEach((elemento, index) => {
+                    elemento.value = palavraDigitada[index];
+                })
+            }
+        }
+
+        if (!existePalavra) {
+            document.getElementsByClassName("modal-title")[0].innerHTML = "<h1>Animal,</h1>"
+            document.getElementsByClassName("modal-body")[0].innerHTML = `<p>Esta palavra não existe!</p>`;
+            myModal.show()
+
+            setTimeout(() => {
+                myModal.hide()
+            }, 2000)
+            return;
+        }
+
+        let certos = "";
+        let letraContagem = {}; // Para contar as ocorrências de letras na palavra
+        let x = 0;
+
+        // Contando a quantidade de cada letra na palavra
+        palavra.split("").forEach(letter => {
+            letraContagem[letter] = (letraContagem[letter] || 0) + 1;
+        });
+
+        // Primeira loop para marcar as letras certas (verdes)
+        Array.from(form.elements).forEach(elemento => {
+            if (elemento.type === "text") {
+                const inputValue = removerAcentos(elemento.value.toUpperCase()); // Para letras com acento ficarem verdes caso exista na palavra premiada
+                if (palavra[x] === inputValue) {
+                    certos += inputValue;
+                    elemento.classList.add("green"); // Marca como verde
+                    letraContagem[inputValue]--; // Diminui a contagem da letra na palavra
                 }
-                palavra = array[Math.abs(hash) % (19081 + 1)].toUpperCase();
-            });
-
-        function mudaLinha(contador) {
-            var form = document.getElementById("linha" + contador);
-            form.addEventListener("submit", function (event) {
-                event.preventDefault()
-            })
-
-            let conteudoConcatenado = "";
-
-            Array.from(form.elements).forEach(elemento => {
-                conteudoConcatenado += elemento.value.toLocaleLowerCase();
-            });
-
-            conteudoConcatenado = removerAcentos(conteudoConcatenado)
-
-            Array.from(form.elements).forEach(elemento => {
-                elemento.value = removerAcentos(elemento.value);
-            })
-
-            if (conteudoConcatenado.length < 5) {
-                return;
+                x++;
             }
+        });
 
-            var existePalavra = false
-
-            palavraDigitada = "";
-            for (var i = 0; i < array.length; i++) {
-                if (removerAcentos(array[i].toString()) === conteudoConcatenado) {
-                    existePalavra = true;
-                    palavraDigitada = array[i].toString()
-                    Array.from(form.elements).forEach((elemento, index) => {
-                        elemento.value = palavraDigitada[index];
-                    })
-                }
-            }
-
-            if (removerAcentos(palavra.toString()) !== conteudoConcatenado.toUpperCase().toString() && existePalavra) {
-                aproveitamento(contador)
-            }
-
-            if (!existePalavra) {
-                document.getElementsByClassName("modal-title")[0].innerHTML = "<h1>Animal,</h1>"
-                document.getElementsByClassName("modal-body")[0].innerHTML = `<p>Esta palavra não existe!</p>`;
-                myModal.show()
-
-                setTimeout(() => {
-                    myModal.hide()
-                }, 2000)
-                return;
-            }
-
-            let certos = "";
-            let letraContagem = {}; // Para contar as ocorrências de letras na palavra
-            let x = 0;
-
-            // Contando a quantidade de cada letra na palavra
-            palavra.split("").forEach(letter => {
-                letraContagem[letter] = (letraContagem[letter] || 0) + 1;
-            });
-
-            // Primeira loop para marcar as letras certas (verdes)
-            Array.from(form.elements).forEach(elemento => {
-                if (elemento.type === "text") {
-                    const inputValue = removerAcentos(elemento.value.toUpperCase()); // Para letras com acento ficarem verdes caso exista na palavra premiada
-                    if (palavra[x] === inputValue) {
-                        certos += inputValue;
-                        elemento.classList.add("green"); // Marca como verde
-                        letraContagem[inputValue]--; // Diminui a contagem da letra na palavra
-                    }
-                    x++;
-                }
-            });
-
-            x = 0;
-            Array.from(form.elements).forEach(elemento => {
-                if (elemento.type === "text") {
-                    const inputValue = removerAcentos(elemento.value.toUpperCase()); // Para letras com acento ficarem amarelas caso exista na palavra premiada
-                    if (!elemento.classList.contains("green")) {
-                        if (letraContagem[inputValue] > 0) {
-                            if (palavra[x] !== inputValue) {
-                                elemento.classList.add("yellow");
-                                letraContagem[inputValue]--;
-                            }
-                        } else {
-                            elemento.classList.add("red");
+        x = 0;
+        Array.from(form.elements).forEach(elemento => {
+            if (elemento.type === "text") {
+                const inputValue = removerAcentos(elemento.value.toUpperCase()); // Para letras com acento ficarem amarelas caso exista na palavra premiada
+                if (!elemento.classList.contains("green")) {
+                    if (letraContagem[inputValue] > 0) {
+                        if (palavra[x] !== inputValue) {
+                            elemento.classList.add("yellow");
+                            letraContagem[inputValue]--;
                         }
-                    }
-                    x++;
-                }
-            });
-
-            var acertou = false
-            if (removerAcentos(palavra.toString()) === conteudoConcatenado.toUpperCase().toString()) {
-                acertou = true
-                document.getElementsByClassName("modal-title")[0].innerHTML = "<h1>Você Acertou!</h1>"
-                document.getElementsByClassName("modal-body")[0].innerHTML = `<p>Parabéns!</p>`
-                myModal.show()
-                setTimeout(() => {
-                    myModal.hide()
-                }, 2000)
-            }
-
-            if (!acertou && contador >= 6) {
-                document.getElementsByClassName("modal-title")[0].innerHTML = "<h1>Ops!</h1>"
-                document.getElementsByClassName("modal-body")[0].innerHTML = `<p>Você errou todas as tentativas! A palavra certa é: ${palavra}</p>`;
-                myModal.show()
-
-                setTimeout(() => {
-                    myModal.hide()
-                }, 5000)
-            }
-
-            Array.from(form.elements).forEach(elemento => {
-                elemento.setAttribute("disabled", true);
-            })
-
-            if(acertou) return;
-            contador++;
-            form = document.getElementById("linha" + contador);
-            Array.from(form.elements).forEach(elemento => {
-                elemento.removeAttribute("disabled");
-            })
-            form.elements[0].focus();
-        }
-
-        document.getElementsByTagName("input")[0].focus();
-
-        function moveFocus(correntID, nextID) {
-            const correntInput = document.getElementById(correntID);
-            const nextInput = document.getElementById(nextID);
-
-            if (correntInput && correntInput.value.length >= correntInput.maxLength) {
-                if (nextInput && document.activeElement !== nextInput) {
-                    nextInput.focus();
-                    nextInput.select();
-                }
-            }
-        }
-
-        function removerAcentos(str) {
-            return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-        }
-        function keyPress(elemento, id) {
-            elemento.addEventListener('keydown', ({key}) => {
-                if (key === "Backspace" || key === 'Delete') {
-                    if(elemento.value === ""){
-                            document.getElementById(id-1).focus()
+                    } else {
+                        elemento.classList.add("red");
                     }
                 }
-            })
+                x++;
+            }
+        });
+
+        var acertou = false
+        if (removerAcentos(palavra.toString()) === conteudoConcatenado.toUpperCase().toString()) {
+            acertou = true
+            let percentual = 100 - (100 / 6 * (contador - 1));
+            document.getElementsByClassName("modal-title")[0].innerHTML = "<h1>Você Acertou!</h1>"
+            document.getElementsByClassName("modal-body")[0].innerHTML = `<p>Parabéns! Você consegiu com ${Math.round(percentual)}% de aproveitamento.</p>`
+            myModal.show()
+            setTimeout(() => {
+                myModal.hide()
+            }, 2000)
+        } else {
+            aproveitamento(contador)
         }
-        function aproveitamento(contador){
-            percentual = 100 / 6 * contador
-            document.getElementsByClassName("progress")[0].setAttribute("aria-valuenow", percentual)
-            document.getElementsByClassName("progress-bar")[0].style = `width: ${percentual}%`
-            return percentual
+
+        if (!acertou && contador >= 6) {
+            document.getElementsByClassName("modal-title")[0].innerHTML = "<h1>Ops!</h1>"
+            document.getElementsByClassName("modal-body")[0].innerHTML = `<p>Você errou todas as tentativas! A palavra certa é: ${palavra}</p>`;
+            myModal.show()
+
+            setTimeout(() => {
+                myModal.hide()
+            }, 5000)
         }
+
+        Array.from(form.elements).forEach(elemento => {
+            elemento.setAttribute("disabled", true);
+        })
+
+        if(acertou) return;
+        contador++;
+        form = document.getElementById("linha" + contador);
+        Array.from(form.elements).forEach(elemento => {
+            elemento.removeAttribute("disabled");
+        })
+        form.elements[0].focus();
+    }
+
+    document.getElementsByTagName("input")[0].focus();
+
+    function moveFocus(correntID, nextID) {
+        const correntInput = document.getElementById(correntID);
+        const nextInput = document.getElementById(nextID);
+
+        if (correntInput && correntInput.value.length >= correntInput.maxLength) {
+            if (nextInput && document.activeElement !== nextInput) {
+                nextInput.focus();
+                nextInput.select();
+            }
+        }
+    }
+
+    function removerAcentos(str) {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    }
+    function keyPress(elemento, id) {
+        elemento.addEventListener('keydown', ({key}) => {
+            if (key === "Backspace" || key === 'Delete') {
+                if(elemento.value === ""){
+                        document.getElementById(id-1).focus()
+                }
+            }
+        })
+    }
+
+    function aproveitamento(contador) {
+        let percentual = 100 / 6 * contador
+        document.getElementsByClassName("progress")[0].setAttribute("aria-valuenow", percentual)
+        document.getElementsByClassName("progress-bar")[0].style = `width: ${percentual}%`
+
+        const progressBar = document.querySelector(".progress-bar");
+
+        // Atualiza as classes de cor com base no percentual
+        progressBar.classList.remove("bg-success", "bg-primary", "bg-warning", "bg-danger");
+
+        if (percentual <= 33) {
+            progressBar.classList.add("bg-success"); // Verde para até 33%
+        } else if (percentual <= 66) {
+            progressBar.classList.add("bg-primary"); // Azul para 34% a 66%
+        } else if (percentual <= 99) {
+            progressBar.classList.add("bg-warning"); // Amarelo para 67% a 99%
+        } else {
+            progressBar.classList.add("bg-danger"); // Vermelho para 100%
+        }
+    }
 </script>
 </body>
 </html>
