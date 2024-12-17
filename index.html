@@ -9,7 +9,12 @@
 </head>
 <body class="container">
 <header class="row">
-    <h1 class="text-center my-5 text-white h1titulo">TERMO</h1></header>
+    <h1 class="text-center my-5 text-white h1titulo">TERMO</h1>
+</header>
+
+<div id="semiAlerta" style="height: 40px;"></div>
+<div hidden="" class="alert alert-dark text-center mb-2" role="alert" id="alerta"></div>
+
 <form id="linha1" class="row justify-content-center">
     <input class="square-input mx-1 mb-1" id="1" onkeydown="keyPress(this, 1)" onfocus="this.select()" oninput="moveFocus(1,2)" maxlength="1" type="text" autocomplete="off" required/>
     <input class="square-input mx-1 mb-1" id="2" onkeydown="keyPress(this, 2)" onfocus="this.select()" oninput="moveFocus(2,3)" maxlength="1" type="text" autocomplete="off" required/>
@@ -20,7 +25,7 @@
 </form>
 
 <form id="linha2" class="row justify-content-center">
-    <input class="jerfson square-input mx-1 mb-1" id="6" onkeydown="keyPress(this, 6)" onfocus="this.select()" oninput="moveFocus(6,7)" maxlength="1" type="text" autocomplete="off" required disabled/>
+    <input class="square-input mx-1 mb-1" id="6" onkeydown="keyPress(this, 6)" onfocus="this.select()" oninput="moveFocus(6,7)" maxlength="1" type="text" autocomplete="off" required disabled/>
     <input class="square-input mx-1 mb-1" id="7" onkeydown="keyPress(this, 7)" onfocus="this.select()" oninput="moveFocus(7,8)" maxlength="1" type="text" autocomplete="off" required disabled/>
     <input class="square-input mx-1 mb-1" id="8" onkeydown="keyPress(this, 8)" onfocus="this.select()" oninput="moveFocus(8,9)" maxlength="1" type="text" autocomplete="off" required disabled/>
     <input class="square-input mx-1 mb-1" id="9" onkeydown="keyPress(this, 9)" onfocus="this.select()" oninput="moveFocus(9,10)" maxlength="1" type="text" autocomplete="off" required disabled/>
@@ -85,7 +90,8 @@
 
 <script src="js/bootstrap.bundle.js"></script>
 <script>
-    const myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+    const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+
     var palavra = "";
     let array = [];
 
@@ -145,12 +151,20 @@
         }
 
         if (!existePalavra) {
-            document.getElementsByClassName("modal-title")[0].innerHTML = "<h1>Animal,</h1>"
-            document.getElementsByClassName("modal-body")[0].innerHTML = `<p>Esta palavra não existe!</p>`;
-            myModal.show()
+            document.getElementById('alerta').innerText = "Animal, esta palavra não existe!"
+            document.getElementById('semiAlerta').setAttribute('hidden', '')
+            ,
+            document.getElementById("alerta").removeAttribute('hidden')
+
+            document.getElementById('alerta').style.height = '30px'; // Diminuir a altura do retângulo
+            document.getElementById('alerta').style.fontSize = '18px'; // Diminuir o tamanho da fonte do texto
+            document.getElementById('alerta').style.lineHeight = '0'; // Alinha verticalmente o texto no centro
+            document.getElementById('alerta').style.width = '400px'; // Definir largura do retângulo
+            document.getElementById('alerta').style.margin = '0 auto'; // Centraliza o retângulo horizontalmente
 
             setTimeout(() => {
-                myModal.hide()
+                document.getElementById('semiAlerta').removeAttribute('hidden')
+                document.getElementById("alerta").setAttribute("hidden", '')
             }, 2000)
             return;
         }
