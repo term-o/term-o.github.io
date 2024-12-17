@@ -64,3 +64,10 @@ body {
 .h1titulo {
     font-weight: bold;
 }
+
+.alert{
+    font-weight: bold;
+    background: #0099fc;
+    color: white;
+    border: none;
+}
